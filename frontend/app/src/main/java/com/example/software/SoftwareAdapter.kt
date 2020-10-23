@@ -29,7 +29,7 @@ class SoftwareAdapter(var softwareList: ArrayList<Software>, val context: Contex
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(s: Software, context: Context){
-            val url = "http://192.168.0.164:8080/api/bicycles"
+            val url = "http://192.168.1.48:8080/img/software-"
             val txt_name: TextView = itemView.findViewById(R.id.textViewName)
             val txt_version: TextView = itemView.findViewById(R.id.textViewVersion)
             val txt_release: TextView = itemView.findViewById(R.id.textViewRelease)

@@ -42,17 +42,17 @@ class SoftwareListActivity : AppCompatActivity() {
 
 
     private fun getAllSoftware() {
-        val url = "http://192.168.0.164:8080/api/bicycles"
+        val url = "http://192.168.1.48:8080/api/software"
         val request =
                 JsonArrayRequest(Request.Method.GET, url, null, { response ->
                     try {
                         for (i in 0 until response.length()) {
-                            val bicycle = response.getJSONObject(i)
-                            val id = bicycle.getInt("id")
-                            val name = bicycle.getString("name")
-                            val version = bicycle.getString("version")
-                            val release = bicycle.getString("release")
-                            software.add(Software(id, name, version, release))
+                            val software = response.getJSONObject(i)
+                            val id = software.getInt("id")
+                            val name = software.getString("name")
+                            val version = software.getString("version")
+                            val release = software.getString("release")
+                            this.software.add(Software(id, name, version, release))
                         }
                         viewAdapter.softwareList = software
                         viewAdapter.notifyDataSetChanged()

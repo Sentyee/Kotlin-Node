@@ -1,9 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
     const Software = sequelize.define("software", {
-      title: {
+      name: {
         type: Sequelize.STRING
       },
-      description: {
+      version: {
+        type: Sequelize.STRING
+      },
+      release: {
         type: Sequelize.STRING
       }
     }, {timestamps: false});

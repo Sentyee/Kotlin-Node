@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
    // Validate request
-   if (!req.body.title || !req.body.model) {
+   if (!req.body.name || !req.body.version) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -14,24 +14,25 @@ exports.create = (req, res) => {
 
   // Create a Software
   const software = {
-    title: req.body.title,
-    description: req.body.description
+    name: req.body.name,
+    version: req.body.version,
+    release: req.body.release
   };
 
-  Software.create(tutorial)
+  Software.create(software)
   .then(data => {
     res.send(data);
   })
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the Tutorial."
+        err.message || "Some error occurred while creating the Software."
     });
   });
 };
 
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Software from the database.
 exports.findAll = (req, res) => {
     Software.findAll()
     .then(data => {
@@ -40,17 +41,16 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving software."
       });
     });
 };
 
-// Find a single Tutorial with an id
+// Find a single Software with an id
 exports.findOne = (req, res) => {
     let id = req.params.id;
     Software.findByPk(id)
         .then(data => {
-            console.log("estos son los datos")
             console.log(data);
             if(!data){
                 res.status(400).send({
@@ -72,22 +72,22 @@ exports.findOne = (req, res) => {
         });
 };
 
-// Update a Tutorial by the id in the request
+// Update a Software by the id in the request
 exports.update = (req, res) => {
   
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a Software with the specified id in the request
 exports.delete = (req, res) => {
   
 };
 
-// Delete all Tutorials from the database.
+// Delete all Sotware from the database.
 exports.deleteAll = (req, res) => {
   
 };
 
-// Find all published Tutorials
+// Find all published Software
 exports.findAllPublished = (req, res) => {
   
 };
