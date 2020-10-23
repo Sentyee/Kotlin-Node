@@ -1,5 +1,5 @@
 const db = require("../models");
-const Bicycle = db.bicycles;
+const Software = db.software;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -12,13 +12,13 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Bicycle
-  const bicycle = {
+  // Create a Software
+  const software = {
     title: req.body.title,
     description: req.body.description
   };
 
-  Bicycle.create(tutorial)
+  Software.create(tutorial)
   .then(data => {
     res.send(data);
   })
@@ -33,7 +33,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    Bicycle.findAll()
+    Software.findAll()
     .then(data => {
       res.send(data);
     })
@@ -47,27 +47,29 @@ exports.findAll = (req, res) => {
 
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
-  let id = req.params.id;
-  Bicycle.findByPk(id)
-    .then(data => {
-      console.log("estos son los datos")
-      console.log(data)
-      if(!data){
-        res.status(400).send({
-          message:
-          "No Bicycle found with specified id"
+    let id = req.params.id;
+    Software.findByPk(id)
+        .then(data => {
+            console.log("estos son los datos")
+            console.log(data);
+            if(!data){
+                res.status(400).send({
+                    message:
+                        "No Software found with that id"
+                })
+            }
+            res.send(data);
+            return;
         })
-      }
-      res.send(data)
-      return;
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred retrieving bicycle with id"
-      });
-      return;
-    });
+        .catch(err => {
+            console.log(err.message);
+            console.log("hola");
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving software with id"
+            });
+            return;
+        });
 };
 
 // Update a Tutorial by the id in the request
